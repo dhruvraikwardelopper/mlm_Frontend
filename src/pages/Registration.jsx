@@ -1,4 +1,7 @@
-import React, { useState } from "react";
+
+
+import React, { useState, useEffect } from "react";
+import BASE_URL from "../api";
 
 function Registration() {
   const [formData, setFormData] = useState({
@@ -9,102 +12,64 @@ function Registration() {
     sponsorId: "",
   });
 
+  // Get referralId from URL
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const refId = params.get("referral");
+    if (refId) setFormData(prev => ({ ...prev, sponsorId: refId }));
+  }, []);
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
-    console.log("Registration Data:", formData);
-    // 👉 Later you can send this data to backend using fetch/axios
+    try {
+      const res = await fetch(`${BASE_URL}/api/auth/register`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await res.json();
+      if (res.ok) {
+        alert("✅ Registered Successfully!");
+        console.log(data);
+      } else {
+        alert("❌ " + data.message);
+      }
+    } catch (err) {
+      alert("⚠️ Error connecting to server");
+      console.error(err);
+    }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient from-blue-100 to-blue-300">
+    <div className="min-h-screen flex items-center justify-center bg-blue-100">
       <div className="bg-white p-8 rounded-2xl shadow-lg w-full max-w-md">
-        <h2 className="text-3xl font-bold text-center mb-6 text-blue-700">
-          MLM Registration
-        </h2>
+        <h2 className="text-3xl font-bold text-center mb-6 text-blue-700">MLM Registration</h2>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <label className="block text-sm font-medium mb-1">Full Name</label>
-            <input
-              type="text"
-              name="name"
-              placeholder="Enter your name"
-              value={formData.name}
-              onChange={handleChange}
-              className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              required
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium mb-1">Email</label>
-            <input
-              type="email"
-              name="email"
-              placeholder="Enter your email"
-              value={formData.email}
-              onChange={handleChange}
-              className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              required
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium mb-1">Phone</label>
-            <input
-              type="tel"
-              name="phone"
-              placeholder="Enter your phone number"
-              value={formData.phone}
-              onChange={handleChange}
-              className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              required
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium mb-1">Password</label>
-            <input
-              type="password"
-              name="password"
-              placeholder="Create a password"
-              value={formData.password}
-              onChange={handleChange}
-              className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              required
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium mb-1">Sponsor ID</label>
-            <input
-              type="text"
-              name="sponsorId"
-              placeholder="Enter sponsor ID (if any)"
-              value={formData.sponsorId}
-              onChange={handleChange}
-              className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </div>
-
-          <button
-            type="submit"
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg transition duration-200 font-semibold"
-          >
+        <form onSubmit={handleRegister} className="space-y-4">
+          {["name","email","phone","password","sponsorId"].map(field => (
+            <div key={field}>
+              <label className="block text-sm font-medium mb-1">{field.charAt(0).toUpperCase()+field.slice(1)}</label>
+              <input
+                type={field==="password"?"password":"text"}
+                name={field}
+                placeholder={`Enter your ${field}`}
+                value={formData[field]}
+                onChange={handleChange}
+                className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                required={field!=="sponsorId"}
+              />
+            </div>
+          ))}
+          <button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg font-semibold">
             Register
           </button>
+          <h1>For Login <a href="/login" className="text-blue-600">Click here ?</a></h1>
         </form>
-
-        <p className="text-center mt-4 text-sm text-gray-600">
-          Already have an account?{" "}
-          <a href="/login" className="text-blue-600 font-medium hover:underline">
-            Login here
-          </a>
-        </p>
       </div>
     </div>
   );

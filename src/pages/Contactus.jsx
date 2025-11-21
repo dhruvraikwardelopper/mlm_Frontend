@@ -2,7 +2,7 @@ import React from "react";
 
 const Contactus = () => {
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col items-center py-16 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-blue-300/20 flex flex-col items-center py-16 px-4 sm:px-6 lg:px-8">
       {/* Page Header */}
       <div className="max-w-3xl text-center mb-12">
         <h1 className="text-4xl font-bold text-gray-900 mb-3">
@@ -54,7 +54,7 @@ const Contactus = () => {
             </div>
             <button
               type="submit"
-              className="w-full bg-indigo-600 text-white font-semibold py-2 rounded-lg hover:bg-indigo-700 transition"
+              className="w-full bg-[#368ba0] text-white font-semibold py-2 rounded-lg hover:bg-[#02687c] transition"
             >
               Send Message
             </button>
@@ -62,7 +62,7 @@ const Contactus = () => {
         </div>
 
         {/* Contact Info Section */}
-        <div className="bg-indigo-600 text-white p-8 flex flex-col justify-center">
+        <div className="bg-[#368ba0] text-white p-8 flex flex-col justify-center">
           <h2 className="text-2xl font-semibold mb-4">Get in Touch</h2>
           <p className="mb-6 text-indigo-100">
             Reach out to our support team for partnership opportunities, business inquiries, or
@@ -76,7 +76,7 @@ const Contactus = () => {
             </li>
             <li className="flex items-center">
               <span className="mr-3 text-2xl">📧</span>
-              <span>support@mlmnetwork.com</span>
+              <span>mlm@supportgmail.com</span>
             </li>
             <li className="flex items-center">
               <span className="mr-3 text-2xl">📍</span>

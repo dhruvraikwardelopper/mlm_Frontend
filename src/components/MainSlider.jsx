@@ -16,16 +16,16 @@ function MainSlider() {
   };
 
   return (<>
-    <div className="w-3/4 m-auto mb-[10px]">
-      <h1 className="text-[45px] font-[700]  text-center pt-20">Our Happy Members </h1>
+    <div className="w-3/4 m-auto mb-2.5">
+      <h1 className="text-[45px] font-bold  text-center pt-20">Our Happy Members </h1>
       <div className="flex text-[2vw] text-amber-400 justify-center">
         <FaStar /><FaStar /><FaStar /><FaStar /><FaStar />
       </div>
-      <div className="m-15  justify-center">
+      <div className="m-15  justify-center relative z-10">
         <Slider {...settings}>
           {data.map((d) => (<>
        
-          <div className="h-[23vw] p-10 w-[100%] flex gap-5 bg-blue-400/20 text-white rounded-xl  px-5 items-center">
+          <div className="h-[23vw] p-10 w-full flex gap-5 bg-[#addae4] text-white rounded-xl  px-5 items-center">
            <Img image={d.image}/>
            <Data name={d.name} review={d.review} />
            </div>

@@ -26,7 +26,7 @@ function Registration() {
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch(`${BASE_URL}/api/auth/register`, {
+      const res = await fetch(`https://mlm-backend-1-0ypb.onrender.com/api/auth/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),

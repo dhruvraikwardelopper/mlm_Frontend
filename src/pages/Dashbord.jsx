@@ -28,7 +28,7 @@ const DashboardPage = () => {
   // ✅ Fetch Earnings and group by date
   const fetchEarnings = async (userId) => {
     try {
-      const res = await fetch(`${BASE_URL}/api/dashboard/earnings/${userId}`);
+      const res = await fetch(`https://mlm-backend-1-0ypb.onrender.com/api/dashboard/earnings/${userId}`);
       const data = await res.json();
 
       // 🧮 Group earnings by date

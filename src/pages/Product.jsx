@@ -26,7 +26,7 @@ function Product() {
       else setLoading(true);
 
       const res = await axios.get(
-        `${BASE_URL}/api/products?skip=${skip}&limit=${limit}`
+        `https://mlm-backend-1-0ypb.onrender.com/api/products?skip=${skip}&limit=${limit}`
       );
 
       if (initial) {

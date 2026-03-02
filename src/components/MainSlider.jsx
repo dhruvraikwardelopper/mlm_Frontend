@@ -4,7 +4,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { FaStar } from "react-icons/fa6";
 
-import Img from "./img";
+import Img from "./image";
 import Data from "./Data";
 function MainSlider() {
   var settings = {
